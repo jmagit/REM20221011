@@ -1,4 +1,10 @@
-# Curso de Microservicios en Spring
+# Curso de Microservicios en Spring 
+
+## Documentación
+
+- https://docs.spring.io/spring-cloud-commons/docs/current/reference/html/#spring-cloud-loadbalancer
+- https://docs.spring.io/spring-cloud-config/docs/current/reference/html/
+- https://docs.spring.io/spring-security/reference/index.html
 
 ## Base de datos de ejemplos
 
