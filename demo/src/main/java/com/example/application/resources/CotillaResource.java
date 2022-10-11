@@ -44,7 +44,7 @@ public class CotillaResource {
 		List<String> rslt = new ArrayList<>();
 		LocalDateTime inicio = LocalDateTime.now();
 		rslt.add("Inicio: " + inicio);
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 11; i++)
 			try {
 				LocalTime ini = LocalTime.now();
 				rslt.add(srvLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class)
@@ -69,8 +69,8 @@ public class CotillaResource {
 	}
 	@GetMapping(path = "/pelis/{id}/rt")
 	public PelisDto getPelisRT(@PathVariable int id) {
-//		return srvLB.getForObject("lb://CATALOGO-SERVICE/v1/peliculas/{key}?mode=short", PelisDto.class, id);
-		return srv.getForObject("http://localhost:8010/v1/peliculas/{key}?mode=short", PelisDto.class, id);
+		return srvLB.getForObject("lb://CATALOGO-SERVICE/v1/peliculas/{key}?mode=short", PelisDto.class, id);
+//		return srv.getForObject("http://localhost:8010/v1/peliculas/{key}?mode=short", PelisDto.class, id);
 	}
 	
 	@Autowired
@@ -79,7 +79,7 @@ public class CotillaResource {
 	@GetMapping(path = "/balancea/proxy")
 	public List<String> getBalanceoProxy() {
 		List<String> rslt = new ArrayList<>();
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 11; i++)
 			try {
 				rslt.add(proxy.getInfo());
 			} catch (Exception e) {
