@@ -110,7 +110,9 @@ public class CotillaResource {
 		rslt.add("Inicio: " + inicio);
 		for(int i = 0; i < 100; i++) {
 				LocalTime ini = LocalTime.now();
-				rslt.add(cbFactory.create("slow").run(() -> srvLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class), throwable -> "fallback")
+				rslt.add(cbFactory.create("slow").run(
+						() -> srvLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class), 
+						throwable -> "fallback")
 						+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " .ms)" );
 			}
 		LocalDateTime fin = LocalDateTime.now();

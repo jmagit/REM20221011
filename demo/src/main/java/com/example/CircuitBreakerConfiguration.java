@@ -24,7 +24,7 @@ public class CircuitBreakerConfiguration {
 	@Bean
 	public Customizer<Resilience4JCircuitBreakerFactory> defaultCustomizer() {
 		var config = CircuitBreakerConfig.custom()
-				  .failureRateThreshold(15)
+				  .failureRateThreshold(5)
 				  .slowCallRateThreshold(50)
 				  .waitDurationInOpenState(Duration.ofMillis(1000))
 				  .slowCallDurationThreshold(Duration.ofSeconds(2))
@@ -39,7 +39,7 @@ public class CircuitBreakerConfiguration {
 	@Bean
 	public Customizer<Resilience4JCircuitBreakerFactory> slowCustomizer() {
 		var config = CircuitBreakerConfig.custom()
-				  .failureRateThreshold(15)
+				  .failureRateThreshold(5)
 				  .slowCallRateThreshold(50)
 				  .waitDurationInOpenState(Duration.ofMillis(1000))
 				  .slowCallDurationThreshold(Duration.ofSeconds(2))
