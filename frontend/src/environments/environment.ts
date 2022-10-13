@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
   ERROR_LEVEL: 99,
-  securityApiURL: 'http://localhost:4321/',
-  apiURL: 'http://localhost:4321/api/',
-  // securityApiURL: 'http://localhost:8091/',
-  // apiURL: 'http://localhost:8008/api/v1/',
+  // securityApiURL: 'http://localhost:4321/',
+  // apiURL: 'http://localhost:4321/api/',
+  securityApiURL: 'http://localhost:8091/',
+  apiURL: 'http://localhost:8008/api/v1/',
   // securityApiURL: 'http://localhost:8080/auth/',
   // apiURL: 'http://localhost:8080/api/',
 };

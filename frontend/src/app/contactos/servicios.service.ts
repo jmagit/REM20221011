@@ -30,8 +30,8 @@ export class ContactosDAOService extends RESTDAOService<any, any> {
   }
   page(page: number, rows: number = 20): Observable<{ page: number, pages: number, rows: number, list: Array<any> }> {
     return new Observable(subscriber => {
-      // this.http.get<any>(`${this.baseUrl}?page=${page}&size=${rows}&sort=nombre`, this.option)
-      this.http.get<any>(`${this.baseUrl}?_page=${page}&_rows=${rows}&_sort=nombre`, this.option)
+      this.http.get<any>(`${this.baseUrl}?page=${page}&size=${rows}&sort=nombre`, this.option)
+      // this.http.get<any>(`${this.baseUrl}?_page=${page}&_rows=${rows}&_sort=nombre`, this.option)
       .subscribe({
                 next: data => subscriber.next({ page: data.number, pages: data.totalPages, rows: data.totalElements, list: data.content }),
                 error: err => subscriber.error(err)

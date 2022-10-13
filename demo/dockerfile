@@ -1,0 +1,9 @@
+# mvnw clean package -DskipTests
+FROM openjdk:17-alpine
+COPY target/demo-0.0.1-SNAPSHOT.jar /usr/app.jar
+EXPOSE 8001
+ENTRYPOINT ["java","-jar","/usr/app.jar"]
+# CMD ["java","-jar","/usr/app.jar"]
+
+# docker build -t ms-demo .
+# docker run -d --name ms-demo -p 8001:8001 --network microservicios --env DB_SERVER=mysql-sakila:3306 --env DISCOVERY_URL=http://ms-eureka-server:8761 --env CONFIGSRV_URL=http://ms-config-server:8888/ --env ADMINSRV_URL=http://host.docker.internal:8081 --env ZIPKINSRV_URL=http://zipkin:9411 ms-demo
