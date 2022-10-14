@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping(path = "/me-gusta")
@@ -40,6 +41,7 @@ public class MeGustaService {
 
 	@PostMapping
 	@Operation(summary = "Manda un Me Gusta")
+	@SecurityRequirement(name = "bearerAuth")
 	private String add() {
 		return "Llevas " + redisValue.increment(ME_GUSTA_CONT);
 	}

@@ -16,8 +16,10 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +29,8 @@ import com.example.domains.entities.dtos.PelisDto;
 
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RefreshScope
 @RestController
@@ -95,9 +99,15 @@ public class CotillaResource {
 	public PelisDto getPelisProxy(@PathVariable int id) {
 		return proxy.getPeli(id);
 	}
+	
+//	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("authenticated")
+	@SecurityRequirement(name = "bearerAuth")
 	@GetMapping(path = "/pelis/like")
-	public String getPelisLike() {
-		return proxy.meGusta(1);
+	public String getPelisLike(@Parameter(hidden = true) @RequestHeader(required = false) String authorization) {
+		if(authorization == null)
+			return proxy.meGusta(1);
+		return proxy.meGusta(1, authorization);
 	}
 
 	@Autowired

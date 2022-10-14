@@ -33,9 +33,11 @@ import com.example.domains.entities.dtos.ActorShortDto;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @OpenAPIDefinition(
         info = @Info(title = "Microservicio: Demos",  version = "1.0",
@@ -45,6 +47,7 @@ import io.swagger.v3.oas.annotations.info.License;
         ),
         externalDocs = @ExternalDocumentation(description = "Documentación del proyecto", url = "https://github.com/jmagit/curso")
 )
+@SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
 @EnableEurekaClient
 @SpringBootApplication
 @EnableFeignClients("com.example.application.proxies")

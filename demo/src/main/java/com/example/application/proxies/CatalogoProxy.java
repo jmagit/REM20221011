@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.example.domains.entities.dtos.PelisDto;
 
@@ -25,4 +26,6 @@ public interface CatalogoProxy {
 	
 	@PostMapping(path = "/v1/peliculas/{id}/like")
 	String meGusta(@PathVariable int id);
+	@PostMapping(path = "/v1/peliculas/{id}/like")
+	String meGusta(@PathVariable int id, @RequestHeader(value = "Authorization", required = true) String authorization);
 }

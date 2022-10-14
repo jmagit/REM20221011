@@ -13,6 +13,8 @@ import com.example.exceptions.NotFoundException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import feign.FeignException;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 
 @RestControllerAdvice
@@ -120,6 +123,11 @@ public class ApiExceptionHandler {
 	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	public ErrorMessage methodNotSupported(BindException exception) {
 		return new ErrorMessage(405, exception.getMessage(), null, null);
+	}
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	@ExceptionHandler({ AccessDeniedException.class, FeignException.Forbidden.class })
+	public ErrorMessage accessDenied(Exception exception) {
+		return new ErrorMessage(403, "Access Denied", exception.getMessage());
 	}
 
 }

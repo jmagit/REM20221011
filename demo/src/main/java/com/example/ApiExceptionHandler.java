@@ -9,6 +9,8 @@ import com.example.exceptions.BadRequestException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
+import feign.FeignException;
+
 import java.io.Serializable;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
@@ -65,5 +68,10 @@ public class ApiExceptionHandler {
 	@ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
 	public ErrorMessage methodNotSupported(Exception exception) {
 		return new ErrorMessage(exception.getMessage(), "");
+	}
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	@ExceptionHandler({ AccessDeniedException.class, FeignException.Forbidden.class })
+	public ErrorMessage accessDenied(Exception exception) {
+		return new ErrorMessage("Access Denied", exception.getMessage());
 	}
 }
