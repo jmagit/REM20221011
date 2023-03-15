@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import feign.FeignException;
+import feign.RetryableException;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -128,6 +129,11 @@ public class ApiExceptionHandler {
 	@ExceptionHandler({ AccessDeniedException.class, FeignException.Forbidden.class })
 	public ErrorMessage accessDenied(Exception exception) {
 		return new ErrorMessage(403, "Access Denied", exception.getMessage());
+	}
+	@ResponseStatus(HttpStatus.CONFLICT)
+	@ExceptionHandler({ FeignException.ServiceUnavailable.class, RetryableException.class })
+	public ErrorMessage conflict(Exception exception) {
+		return new ErrorMessage(409, exception.getMessage());
 	}
 
 }

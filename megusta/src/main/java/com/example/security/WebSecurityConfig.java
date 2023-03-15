@@ -30,7 +30,7 @@ public class WebSecurityConfig {
 		return source;
 	}
 
-	@Value("${jwt.secret}")
+	@Value("${jwt.key.public}")
 	private String SECRET;
 
 	@Bean
@@ -40,7 +40,7 @@ public class WebSecurityConfig {
 			.csrf().disable()
 			.addFilterAfter(new JWTAuthorizationFilter(SECRET), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "//me-gusta").hasRole("ADMIN")
+//			.antMatchers(HttpMethod.POST, "//me-gusta").hasRole("ADMIN")
 			.anyRequest().permitAll();
 		return http.build();
 	}

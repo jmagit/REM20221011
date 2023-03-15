@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -101,13 +102,14 @@ public class CotillaResource {
 	}
 	
 //	@PreAuthorize("hasRole('ADMIN')")
-	@PreAuthorize("authenticated")
+//	@PreAuthorize("authenticated")
 	@SecurityRequirement(name = "bearerAuth")
-	@GetMapping(path = "/pelis/like")
-	public String getPelisLike(@Parameter(hidden = true) @RequestHeader(required = false) String authorization) {
+	@PostMapping(path = "/pelis/{id}/like")
+	public String getPelisLike(@PathVariable int id, @Parameter(hidden = true) @RequestHeader(required = false) String authorization) {
+		System.out.println("Entrada");
 		if(authorization == null)
-			return proxy.meGusta(1);
-		return proxy.meGusta(1, authorization);
+			return proxy.meGusta(id);
+		return proxy.meGusta(id, authorization);
 	}
 
 	@Autowired

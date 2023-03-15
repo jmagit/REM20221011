@@ -245,7 +245,7 @@ public class FilmResource {
 //		return proxy.sendLike();
 //	}
 
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
 	@Operation(summary = "Enviar un me gusta")
 	@ApiResponse(responseCode = "200", description = "Like enviado")
 	@SecurityRequirement(name = "bearerAuth")
@@ -254,8 +254,8 @@ public class FilmResource {
 			@Parameter(hidden = true) @RequestHeader(required = false) String authorization)
 			throws Exception {
 		if(authorization == null)
-			return proxy.sendLike();
-		return proxy.sendLike(authorization);
+			return proxy.sendLike(id);
+		return proxy.sendLike(id, authorization);
 	}
 
 	public List<Film> novedades(Timestamp fecha) {

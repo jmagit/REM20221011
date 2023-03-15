@@ -30,7 +30,7 @@ public class WebSecurityConfig {
 		return source;
 	}
 
-	@Value("${jwt.secret}")
+	@Value("${jwt.key.public}")
 	private String SECRET;
 
 	@Bean

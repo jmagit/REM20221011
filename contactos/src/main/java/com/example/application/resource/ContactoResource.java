@@ -58,7 +58,8 @@ public class ContactoResource {
 
 	@GetMapping(path = "/{id}")
 	@Operation(summary = "Consultar un contacto")
-	@Secured({ "ROLE_ADMIN" })
+//	@Secured({ "ROLE_ADMIN" })
+//	@SecurityRequirement(name = "bearerAuth")
 	public Contacto getOne(@PathVariable String id) throws Exception {
 		Optional<Contacto> rslt = dao.findById(id);
 		if (!rslt.isPresent())

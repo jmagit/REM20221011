@@ -72,6 +72,8 @@ public class ApiExceptionHandler {
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	@ExceptionHandler({ AccessDeniedException.class, FeignException.Forbidden.class })
 	public ErrorMessage accessDenied(Exception exception) {
+//		exception.printStackTrace(System.err);
+		System.err.println("Interceptor: " + exception.getMessage());
 		return new ErrorMessage("Access Denied", exception.getMessage());
 	}
 }

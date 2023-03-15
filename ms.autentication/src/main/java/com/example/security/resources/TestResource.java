@@ -88,7 +88,7 @@ public class TestResource {
 				.withClaim("name", "Hola Mundo")
 				.withIssuedAt(new Date(System.currentTimeMillis())).withNotBefore(new Date())
 				.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60_000))
-				.sign(Algorithm.RSA256(publicKey, (RSAPrivateKey)privateKey));
+				.sign(Algorithm.RSA256(publicKey, privateKey));
 		DecodedJWT rslt = JWT.require(Algorithm.RSA256(publicKey, null)).withIssuer("MicroserviciosJWT").build()
 				.verify(token);
 		
